@@ -75,5 +75,25 @@ namespace Fazeres___Saberes.Controllers
                 (i => i.InstituicaoID == instituicao.InstituicaoID).First())] = instituicao;
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult Details(long id)
+        {
+            return View(instituicoes.Where(i => i.InstituicaoID == id).First());
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(long id)
+        {
+            return View(instituicoes.Where(i => i.InstituicaoID == id).First());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(Instituicao instituicao)
+        {
+            instituicoes.Remove(instituicoes.Where(i => i.InstituicaoID == instituicao.InstituicaoID).First());
+            return RedirectToAction("Index");
+        }
     }
 }
